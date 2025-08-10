@@ -3,6 +3,12 @@ from utils.pdf_reader import extract_text_from_pdf
 from utils.matcher import compare_keywords
 from utils.keywords import extract_keyphrases
 from utils.semantic import semantic_cover
+from utils.skill_extractor import analyse_cv_vs_jd
+from utils.ats_check import ats_audit
+from utils.skill_extractor import _SKILLS_BY_CAT  # just for suggestions mapping
+from utils.suggestions import craft_suggestions
+
+
 
 
 # Page config
@@ -66,18 +72,80 @@ if uploaded_cv and (uploaded_jd or jd_text_input):
         with st.expander("Job Description Text"):
             st.write(jd_text[:1000] + "..." if len(jd_text) > 1000 else jd_text)
 
-        # --- Matching logic and results ---
+        # --- Semantic keyphrase matching (dynamic, domain-agnostic) ---
         if cv_text.strip() and jd_text.strip():
-            results = compare_keywords(cv_text, jd_text)
+            results = analyse_cv_vs_jd(cv_text, jd_text)
 
-            st.subheader("Match Results")
+            st.subheader("Match Results (ATS-style)")
             st.write(f"Match Score: {results['score']}%")
 
-            with st.expander("Matched Keywords"):
-                st.write(", ".join(sorted(results['matched'])) if results['matched'] else "None")
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                st.metric("JD Skills", len(results["jd_skills"]))
+            with col2:
+                st.metric("Matched", len(results["matched"]))
+            with col3:
+                st.metric("Missing", len(results["missing"]))
 
-            with st.expander("Missing Keywords from CV"):
-                st.write(", ".join(sorted(results['missing'])) if results['missing'] else "None")
+            with st.expander("Matched Skills"):
+                st.write(", ".join(results["matched"]) or "None")
+
+            with st.expander("Missing Skills (consider adding if you have them)"):
+                st.write(", ".join(results["missing"]) or "None")
+
+            with st.expander("Extra Skills in CV (not in JD)"):
+                st.write(", ".join(results["extra"]) or "None")
+
+            with st.expander("Detected JD Skills"):
+                st.write(", ".join(results["jd_skills"]) or "None")
+
+            with st.expander("Category Coverage"):
+                rows = []
+                for cat, d in results["category_breakdown"].items():
+                    rows.append(f"{cat}: {d['matched']}/{d['jd_total']}")
+                st.write("\n".join(rows) if rows else "No JD skills detected")
         else:
             st.warning("Please upload both CV and JD before analysis.")
+
+                # ATS audit of the uploaded CV PDF
+        ats = ats_audit(uploaded_cv)
+
+        st.subheader("ATS Checks")
+        cols = st.columns(4)
+        cols[0].metric("Pages", ats["pages"])
+        cols[1].metric("Tables", ats["tables"])
+        cols[2].metric("Images", ats["images"])
+        cols[3].metric("Font families", ats["font_families"])
+
+        with st.expander("Warnings"):
+            if ats["warnings"]:
+                st.write("\n".join(f"- {w}" for w in ats["warnings"]))
+            else:
+                st.write("No major ATS issues detected.")
+
+        # Actionable suggestions
+        st.subheader("Suggestions")
+        suggestions = craft_suggestions(results, _SKILLS_BY_CAT, ats)
+        if suggestions:
+            st.write("\n".join(f"- {s}" for s in suggestions))
+        else:
+            st.write("Looks solid. Minor polishing only.")
+
+        # Export a simple Markdown report
+        report_md = []
+        report_md.append(f"# CVSense Pro Report\n")
+        report_md.append(f"**Score:** {results['score']}%\n")
+        report_md.append("## Matched Skills\n" + ", ".join(results["matched"]) + "\n")
+        report_md.append("## Missing Skills\n" + (", ".join(results["missing"]) or "None") + "\n")
+        report_md.append("## Extra Skills\n" + (", ".join(results["extra"]) or "None") + "\n")
+        report_md.append("## ATS Warnings\n" + ("\n".join(f"- {w}" for w in ats["warnings"]) or "None") + "\n")
+        report_md.append("## Suggestions\n" + ("\n".join(f"- {s}" for s in suggestions) or "None") + "\n")
+        md_text = "\n".join(report_md)
+
+        st.download_button(
+            label="Download Report (Markdown)",
+            data=md_text,
+            file_name="cvsense_report.md",
+            mime="text/markdown"
+        )
 
