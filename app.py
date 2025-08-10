@@ -1,6 +1,9 @@
 import streamlit as st
 from utils.pdf_reader import extract_text_from_pdf
 from utils.matcher import compare_keywords
+from utils.keywords import extract_keyphrases
+from utils.semantic import semantic_cover
+
 
 # Page config
 st.set_page_config(page_title="CVSense Pro", layout="centered")
