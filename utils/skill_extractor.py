@@ -3,6 +3,16 @@ import os
 import re
 from typing import Dict, List, Set, Tuple
 from rapidfuzz import fuzz
+import spacy
+import streamlit as st
+
+@st.cache_resource
+def load_spacy():
+    return spacy.load("en_core_web_sm")
+
+_nlp = load_spacy()
+ # load once globally
+
 
 # --------- load skills bank ---------
 _REPO_ROOT = os.path.dirname(os.path.dirname(__file__))

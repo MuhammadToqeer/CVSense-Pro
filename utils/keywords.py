@@ -1,8 +1,14 @@
-from keybert import KeyBERT
 from typing import List, Tuple
 from utils.clean import clean_text_for_skills, is_skillish
+from keybert import KeyBERT
+import streamlit as st
 
-_kw_model = KeyBERT(model="all-MiniLM-L6-v2")
+@st.cache_resource
+def load_kw_model():
+    return KeyBERT(model="all-MiniLM-L6-v2")
+
+_kw_model = load_kw_model()
+
 
 def extract_keyphrases(text: str, top_n: int = 30, is_jd: bool = False) -> List[Tuple[str, float]]:
     if not text or not text.strip():

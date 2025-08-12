@@ -3,8 +3,14 @@ import numpy as np
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
-# small, fast general-purpose model
-_embedder = SentenceTransformer("all-MiniLM-L6-v2")
+import streamlit as st
+from sentence_transformers import SentenceTransformer
+
+@st.cache_resource
+def load_embedder():
+    return SentenceTransformer("all-MiniLM-L6-v2")
+_embedder = load_embedder()
+
 
 def _embed(texts: List[str]) -> np.ndarray:
     return _embedder.encode(texts, normalize_embeddings=True)
