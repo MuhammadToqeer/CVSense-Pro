@@ -1,0 +1,142 @@
+{
+  "skills": {
+    "programming_languages": [
+      "python", "sql", "scala", "r", "java", "javascript", "typescript", "bash", "powershell", "go", "rust"
+    ],
+    "data_frame_and_compute": [
+      "pandas", "numpy", "polars", "dask", "pyarrow", "vaex", "modin"
+    ],
+    "ml_core": [
+      "scikit-learn", "xgboost", "lightgbm", "catboost", "statsmodels",
+      "feature engineering", "model selection", "cross validation", "k-fold",
+      "hyperparameter tuning", "grid search", "random search", "bayesian optimization",
+      "regression", "linear regression", "logistic regression",
+      "classification", "clustering", "kmeans", "dbscan", "hierarchical clustering",
+      "dimensionality reduction", "pca", "tsne", "umap",
+      "anomaly detection", "isolation forest", "one class svm"
+    ],
+    "time_series": [
+      "time series", "forecasting", "prophet", "arima", "sarima", "sarimax",
+      "ets", "tbats", "seasonality", "lag features", "rolling windows"
+    ],
+    "recommenders": [
+      "recommender systems", "collaborative filtering", "matrix factorization", "implicit feedback",
+      "als", "faiss", "annoy", "vector search"
+    ],
+    "deep_learning": [
+      "pytorch", "tensorflow", "keras", "jax", "cnn", "rnn", "lstm", "gru",
+      "transformers", "attention", "autoencoders", "gan", "diffusion models",
+      "transfer learning", "fine tuning"
+    ],
+    "nlp": [
+      "nlp", "spacy", "nltk", "huggingface", "transformers", "bert", "roberta", "gpt",
+      "tokenization", "sentencepiece", "byte pair encoding",
+      "ner", "pos tagging", "text classification", "summarization",
+      "question answering", "semantic search", "retrieval augmented generation", "rag",
+      "vector embeddings", "sentence embeddings", "chroma", "faiss", "weaviate"
+    ],
+    "computer_vision": [
+      "opencv", "yolo", "yolov5", "yolov7", "yolov8", "detectron2",
+      "segmentation", "instance segmentation", "semantic segmentation",
+      "object detection", "ocr", "tesseract", "mediapipe"
+    ],
+    "genai_llms": [
+      "llm", "prompt engineering", "function calling", "tools", "agents",
+      "openai api", "azure openai", "langchain", "llamaindex",
+      "model serving", "quantization", "llm inference", "vllm", "tensor rt", "onnx runtime"
+    ],
+    "mlops": [
+      "mlops", "mlflow", "model registry", "experiment tracking", "feature store", "feast",
+      "model monitoring", "concept drift", "data drift", "inference logging", "shadow deployment",
+      "canary release", "blue green deployment"
+    ],
+    "data_engineering_core": [
+      "apache spark", "spark", "pyspark", "spark sql", "spark streaming", "structured streaming",
+      "delta lake", "delta live tables", "dlt", "databricks", "unity catalog",
+      "airflow", "dbt", "kafka", "event hubs", "etl", "elt", "cdc", "schema evolution",
+      "autoloader", "medallion architecture", "data vault", "lakehouse"
+    ],
+    "cloud_azure": [
+      "azure", "azure data factory", "adf", "synapse", "azure synapse", "azure databricks",
+      "azure data lake", "adls", "azure blob storage", "key vault", "azure functions",
+      "event hubs", "azure devops", "aks", "kubernetes", "docker", "logic apps", "app service"
+    ],
+    "cloud_aws": [
+      "aws", "s3", "athena", "glue", "emr", "redshift", "lambda", "ecs", "eks", "ecr", "cloudwatch"
+    ],
+    "cloud_gcp": [
+      "gcp", "bigquery", "dataproc", "dataflow", "composer", "gcs", "vertex ai", "pubsub"
+    ],
+    "databases_warehousing_bi": [
+      "sql server", "postgresql", "mysql", "oracle", "snowflake", "teradata",
+      "power bi", "tableau", "looker", "metabase"
+    ],
+    "data_quality_governance": [
+      "great expectations", "data profiling", "data validation", "data lineage",
+      "data catalog", "governance", "pii masking", "privacy"
+    ],
+    "testing_ci_cd_devops": [
+      "unit testing", "integration testing", "pytest", "unittest",
+      "ci cd", "github actions", "gitlab ci", "azure pipelines", "terraform", "iac"
+    ],
+    "metrics_eval": [
+      "mape", "rmse", "mae", "r2", "precision", "recall", "f1 score", "roc auc", "pr auc",
+      "lift", "auc", "calibration", "shap", "lime", "ab testing", "uplift modelling"
+    ],
+    "security_governance_ops": [
+      "iam", "rbac", "secret management", "audit logging", "cost optimization"
+    ],
+    "tools_editors": [
+      "git", "github", "gitlab", "bitbucket", "vs code", "jupyter", "notebooks", "poetry", "pipenv"
+    ]
+  },
+  "synonyms": {
+    "adf": "azure data factory",
+    "data factory": "azure data factory",
+    "azure synapse analytics": "synapse",
+    "databricks dlt": "delta live tables",
+    "delta": "delta lake",
+    "adls gen2": "adls",
+    "ms sql": "sql server",
+    "postgres": "postgresql",
+    "gcp bigquery": "bigquery",
+    "aws redshift": "redshift",
+    "ml ops": "mlops",
+    "experiment tracking": "mlflow",
+    "registry": "model registry",
+    "streaming": "spark streaming",
+    "structured stream": "structured streaming",
+    "py spark": "pyspark",
+    "spark-sql": "spark sql",
+    "blob": "azure blob storage",
+    "keyvault": "key vault",
+    "azure kubernetes service": "aks",
+    "ms power bi": "power bi",
+    "viz": "tableau",
+    "object character recognition": "ocr",
+    "named entity recognition": "ner",
+    "entity recognition": "ner",
+    "hyperparameter optimisation": "hyperparameter tuning",
+    "gridsearch": "grid search",
+    "randomsearch": "random search",
+    "bert model": "bert",
+    "yolo v5": "yolov5",
+    "yolo v7": "yolov7",
+    "yolo v8": "yolov8",
+    "apache airflow": "airflow",
+    "dbt core": "dbt",
+    "experiment manager": "mlflow",
+    "ci/cd": "ci cd",
+    "r a g": "rag",
+    "vector database": "vector search",
+    "k8s": "kubernetes",
+    "dockerized": "docker",
+    "azure containers": "aks",
+    "ms excel power bi": "power bi",
+    "google bigquery": "bigquery",
+    "aws s3": "s3",
+    "faiss index": "faiss",
+    "experiment tracker": "mlflow",
+    "feature registry": "feature store"
+  }
+}
