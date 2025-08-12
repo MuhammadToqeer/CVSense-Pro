@@ -1,8 +1,5 @@
 import streamlit as st
 from utils.pdf_reader import extract_text_from_pdf
-from utils.matcher import compare_keywords
-from utils.keywords import extract_keyphrases
-from utils.semantic import semantic_cover
 from utils.skill_extractor import analyse_cv_vs_jd
 from utils.ats_check import ats_audit
 from utils.skill_extractor import _SKILLS_BY_CAT  # just for suggestions mapping
